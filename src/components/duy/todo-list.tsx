@@ -4,29 +4,16 @@ import {TodoItem} from './todo-item'
 import {Input} from "@/components/ui/input"
 import {Button} from "@/components/ui/button"
 import {PlusCircle} from "lucide-react"
-import {useAppDispatch, useAppSelector} from "@/redux-config/hooks";
-import {todoSlices} from "@/features/todo.slices";
-
-interface Todo {
-  id: string
-  text: string
-  completed: boolean
-}
 
 interface TodoListProps {
-  initialTodos?: Todo[]
 }
 
-export default function TodoList({initialTodos = []}: TodoListProps) {
-  const todos = useAppSelector(state => state.todos)
+export default function TodoList({}: TodoListProps) {
+  const todos = []
   const [newTodo, setNewTodo] = useState('')
-  const dispatch = useAppDispatch()
 
   const handleAddTodo = () => {
-    if (newTodo.trim() !== '') {
-      dispatch(todoSlices.actions.addTodo({text: newTodo}))
-      setNewTodo('')
-    }
+
   }
 
 

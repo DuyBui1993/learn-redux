@@ -3,8 +3,6 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Trash2, Edit2, Check } from "lucide-react"
-import {useAppDispatch} from "@/redux-config/hooks";
-import {todoSlices} from "@/features/todo.slices";
 
 interface TodoItemProps {
   id: string
@@ -17,13 +15,10 @@ export function TodoItem({ id, text, completed, onEdit }: TodoItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editedText, setEditedText] = useState(text)
 
-  const dispatch = useAppDispatch()
   const handleToggle = () => {
-    dispatch(todoSlices.actions.toggleComplete(id))
   }
 
   const handleDelete = () => {
-    dispatch(todoSlices.actions.removeTodo(id))
   }
 
   const handleEdit = () => {
