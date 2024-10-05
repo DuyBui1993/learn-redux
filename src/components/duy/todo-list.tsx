@@ -4,6 +4,8 @@ import {TodoItem} from './todo-item'
 import {Input} from "@/components/ui/input"
 import {Button} from "@/components/ui/button"
 import {PlusCircle} from "lucide-react"
+import {useAppDispatch, useAppSelector} from "@/redux-config/hooks";
+import {todoSlices} from "@/features/todo.slices";
 
 interface Todo {
   id: string
@@ -16,31 +18,17 @@ interface TodoListProps {
 }
 
 export default function TodoList({initialTodos = []}: TodoListProps) {
-  const [todos, setTodos] = useState<Todo[]>(initialTodos || [])
+  const todos = useAppSelector(state => state.todos)
   const [newTodo, setNewTodo] = useState('')
+  const dispatch = useAppDispatch()
 
-  const addTodo = () => {
+  const handleAddTodo = () => {
     if (newTodo.trim() !== '') {
-      setTodos([...todos, {id: Date.now().toString(), text: newTodo, completed: false}])
+      dispatch(todoSlices.actions.addTodo({text: newTodo}))
       setNewTodo('')
     }
   }
 
-  const toggleTodo = (id: string) => {
-    setTodos(todos.map(todo =>
-        todo.id === id ? {...todo, completed: !todo.completed} : todo
-    ))
-  }
-
-  const deleteTodo = (id: string) => {
-    setTodos(todos.filter(todo => todo.id !== id))
-  }
-
-  const editTodo = (id: string, newText: string) => {
-    setTodos(todos.map(todo =>
-        todo.id === id ? {...todo, text: newText} : todo
-    ))
-  }
 
   return (
       <div className="max-w-md mx-auto mt-8 p-6 bg-gray-50 rounded-xl shadow-lg">
@@ -53,7 +41,7 @@ export default function TodoList({initialTodos = []}: TodoListProps) {
               placeholder="Add a new todo"
               className="flex-grow"
           />
-          <Button onClick={addTodo}>
+          <Button onClick={handleAddTodo}>
             <PlusCircle className="h-5 w-5 mr-2"/>
             Add
           </Button>
@@ -65,9 +53,6 @@ export default function TodoList({initialTodos = []}: TodoListProps) {
                   id={todo.id}
                   text={todo.text}
                   completed={todo.completed}
-                  onToggle={toggleTodo}
-                  onDelete={deleteTodo}
-                  onEdit={editTodo}
               />
           ))}
         </div>

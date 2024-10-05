@@ -3,19 +3,28 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Trash2, Edit2, Check } from "lucide-react"
+import {useAppDispatch} from "@/redux-config/hooks";
+import {todoSlices} from "@/features/todo.slices";
 
 interface TodoItemProps {
   id: string
   text: string
   completed: boolean
-  onToggle: (id: string) => void
-  onDelete: (id: string) => void
   onEdit: (id: string, newText: string) => void
 }
 
-export function TodoItem({ id, text, completed, onToggle, onDelete, onEdit }: TodoItemProps) {
+export function TodoItem({ id, text, completed, onEdit }: TodoItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editedText, setEditedText] = useState(text)
+
+  const dispatch = useAppDispatch()
+  const handleToggle = () => {
+    dispatch(todoSlices.actions.toggleComplete(id))
+  }
+
+  const handleDelete = () => {
+    dispatch(todoSlices.actions.removeTodo(id))
+  }
 
   const handleEdit = () => {
     if (isEditing) {
@@ -30,7 +39,7 @@ export function TodoItem({ id, text, completed, onToggle, onDelete, onEdit }: To
           <Checkbox
               id={`todo-${id}`}
               checked={completed}
-              onCheckedChange={() => onToggle(id)}
+              onCheckedChange={() => handleToggle()}
               className="border-2 border-primary"
           />
           {isEditing ? (
@@ -52,7 +61,7 @@ export function TodoItem({ id, text, completed, onToggle, onDelete, onEdit }: To
           <Button variant="outline" size="icon" onClick={handleEdit}>
             {isEditing ? <Check className="h-4 w-4" /> : <Edit2 className="h-4 w-4" />}
           </Button>
-          <Button variant="outline" size="icon" onClick={() => onDelete(id)}>
+          <Button variant="outline" size="icon" onClick={() => handleDelete()}>
             <Trash2 className="h-4 w-4" />
           </Button>
         </div>
