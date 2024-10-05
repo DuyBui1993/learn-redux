@@ -5,10 +5,7 @@ import {Input} from "@/components/ui/input"
 import {Button} from "@/components/ui/button"
 import {PlusCircle} from "lucide-react"
 
-interface TodoListProps {
-}
-
-export default function TodoList({}: TodoListProps) {
+export default function TodoList() {
   const todos = []
   const [newTodo, setNewTodo] = useState('')
 

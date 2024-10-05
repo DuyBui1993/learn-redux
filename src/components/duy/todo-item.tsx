@@ -8,10 +8,9 @@ interface TodoItemProps {
   id: string
   text: string
   completed: boolean
-  onEdit: (id: string, newText: string) => void
 }
 
-export function TodoItem({ id, text, completed, onEdit }: TodoItemProps) {
+export function TodoItem({ id, text, completed }: TodoItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editedText, setEditedText] = useState(text)
 
@@ -23,7 +22,6 @@ export function TodoItem({ id, text, completed, onEdit }: TodoItemProps) {
 
   const handleEdit = () => {
     if (isEditing) {
-      onEdit(id, editedText)
     }
     setIsEditing(!isEditing)
   }
