@@ -21,6 +21,11 @@ export default function TodoList() {
           <Input
               type="text"
               value={newTodo}
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  handleAddTodo()
+                }
+              }}
               onChange={(e) => setNewTodo(e.target.value)}
               placeholder="Add a new todo"
               className="flex-grow"
