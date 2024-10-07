@@ -1,10 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
+import {configureStore} from '@reduxjs/toolkit'
+import todoSlices from "@/features/todo.slices";
+
 
 export const makeStore = () => {
-  return configureStore({
-    reducer: {
-    },
-  })
+    return configureStore({
+        reducer: {
+            todos: todoSlices,
+        },
+    })
 }
 
 // Infer the type of makeStore
