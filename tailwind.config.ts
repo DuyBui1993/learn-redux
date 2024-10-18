@@ -18,28 +18,37 @@ const config: Config = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
+  		animation: {
+  			orbit: 'orbit calc(var(--duration)*1s) linear infinite',
+            marquee: 'marquee var(--duration) infinite linear',
+            'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
+  		},
   		keyframes: {
-  			marquee: {
-  				from: {
-  					transform: 'translateX(0)'
+  			orbit: {
+  				'0%': {
+  					transform: 'rotate(0deg) translateY(calc(var(--radius) * 1px)) rotate(0deg)'
   				},
-  				to: {
-  					transform: 'translateX(calc(-100% - var(--gap)))'
+  				'100%': {
+  					transform: 'rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg)'
   				}
   			},
-  			'marquee-vertical': {
-  				from: {
-  					transform: 'translateY(0)'
-  				},
-  				to: {
-  					transform: 'translateY(calc(-100% - var(--gap)))'
-  				}
-  			}
+            marquee: {
+                from: {
+                    transform: 'translateX(0)'
+                },
+                to: {
+                    transform: 'translateX(calc(-100% - var(--gap)))'
+                }
+            },
+            'marquee-vertical': {
+                from: {
+                    transform: 'translateY(0)'
+                },
+                to: {
+                    transform: 'translateY(calc(-100% - var(--gap)))'
+                }
+            }
   		},
-  		animation: {
-  			marquee: 'marquee var(--duration) infinite linear',
-  			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
-  		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
