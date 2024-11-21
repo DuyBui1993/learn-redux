@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { HomePage } from "@/components/dictionary/HomePage";
+import { HomePage } from "@/components/dictionary/homepage/HomePage";
 import StoreProvider from "@/redux-config/StoreProvider";
 import { SessionProvider } from "next-auth/react";
 import { PersistGate } from "redux-persist/integration/react";
