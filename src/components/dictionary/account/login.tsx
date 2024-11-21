@@ -40,7 +40,7 @@ export const Login = () => {
     <div className="grid grid-cols-1 md:grid-cols-5 mx-auto min-h-screen">
       <div className="col-span-1 md:col-span-2 flex flex-col items-center justify-center mx-4 md:mx-24 relative">
         <div
-          className="absolute top-12 left-0"
+          className="absolute top-12 left-0 cursor-pointer"
           onClick={() => window.history.back()}
         >
           <BsArrowLeftCircle fontSize={40} />
