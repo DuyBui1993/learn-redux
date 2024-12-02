@@ -1,8 +1,10 @@
 import { WordData } from "@/components/dictionary/api/words/entity/word";
 
-export const UpdateWord = async (updatedWord: WordData) => {
+import { PATH_URL } from "@/components/utils/dictionaryUtils";
+
+export const updateWord = async (updatedWord: WordData) => {
   const response = await fetch(
-    `https://tudien.fly.dev/api/dictionary/words/${updatedWord.word}`,
+    `${PATH_URL}/${updatedWord.word}`,
 
     {
       method: "PUT",

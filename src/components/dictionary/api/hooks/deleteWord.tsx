@@ -1,5 +1,7 @@
+import { PATH_URL } from "@/components/utils/dictionaryUtils";
+
 export const deleteWord = async (word: string): Promise<void> => {
-  const response = await fetch(`https://tudien.fly.dev/api/dictionary/words`, {
+  const response = await fetch(`${PATH_URL}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
