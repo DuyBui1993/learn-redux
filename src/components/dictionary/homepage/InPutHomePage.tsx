@@ -4,20 +4,17 @@ import * as React from "react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { fetchWordData } from "@/components/dictionary/api/hooks/searchWords";
+
 const InPutHomePage = () => {
   const [valueInPut, setValueInPut] = useState("");
 
   const [isFocused, setFocused] = React.useState(false);
   const router = useRouter();
 
-  const { error, data } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ["repoData", valueInPut],
-    queryFn: async () => {
-      const res = await fetch(
-        `https://tudien.fly.dev/api/dictionary/words/search?q=${valueInPut}`,
-      );
-      return res.json();
-    },
+    queryFn: () => fetchWordData(valueInPut),
     enabled: !!valueInPut,
   });
   if (error) return "An error has occurred: " + error.message;
